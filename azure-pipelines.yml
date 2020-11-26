@@ -67,55 +67,39 @@ stages:
     displayName: Device End-to-End Tests
     dependsOn: [ ]
     jobs:
-      - template: .ci/build.yml@components
-        parameters:
-          name: e2etests_ios
-          dependsOn: [ ] # temporary until tests support parallel runs
-          runChecks: false
-          displayName: iOS
-          windowsImage: ''
-          areaPath: $(AREA_PATH)
-          verbosity: diagnostic
-          cakeFile: e2etests/build.cake
-          cakeTarget: test-ios-emu
-          cakeExtraArgs: --ios-device="`"iPhone 11`"" --ios-runtime="`"com.apple.CoreSimulator.SimRuntime.iOS-14-0`""
+      # - template: .ci/build.yml@components
+      #   parameters:
+      #     name: e2etests_ios
+      #     dependsOn: [ ] # temporary until tests support parallel runs
+      #     runChecks: false
+      #     displayName: iOS
+      #     windowsImage: ''
+      #     areaPath: $(AREA_PATH)
+      #     verbosity: diagnostic
+      #     cakeFile: e2etests/build.cake
+      #     cakeTarget: test-ios-emu
+      #     cakeExtraArgs: --ios-device="`"iPhone 11`"" --ios-runtime="`"com.apple.CoreSimulator.SimRuntime.iOS-14-0`""
 
       - template: .ci/build.yml@components
         parameters:
-          name: e2etests_android_api_23
-          dependsOn: [ 'e2etests_ios' ] # temporary until tests support parallel runs
+          name: e2etests_android_api_30
+          # dependsOn: [ 'e2etests_ios' ] # temporary until tests support parallel runs
           runChecks: false
-          displayName: Android API 23
+          displayName: Android API 30
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
           cakeFile: e2etests/build.cake
           cakeTarget: test-android-emu
-          cakeExtraArgs: --avd-target="`"system-images;android-23;google_apis;x86`""
+          cakeExtraArgs: --avd-target="`"system-images;android-30;google_apis;x86`""
           preBuildSteps:
-            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-23;google_apis;x86\""
-              displayName: Install the Android emulators
-
-      - template: .ci/build.yml@components
-        parameters:
-          name: e2etests_android_api_26
-          dependsOn: [ 'e2etests_android_api_23' ] # temporary until tests support parallel runs
-          runChecks: false
-          displayName: Android API 26
-          windowsImage: ''
-          areaPath: $(AREA_PATH)
-          verbosity: diagnostic
-          cakeFile: e2etests/build.cake
-          cakeTarget: test-android-emu
-          cakeExtraArgs: --avd-target="`"system-images;android-26;google_apis;x86`""
-          preBuildSteps:
-            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-26;google_apis;x86\""
+            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-30;google_apis;x86\""
               displayName: Install the Android emulators
 
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_29
-          dependsOn: [ 'e2etests_android_api_26' ] # temporary until tests support parallel runs
+          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 29
           windowsImage: ''
@@ -130,16 +114,32 @@ stages:
 
       - template: .ci/build.yml@components
         parameters:
-          name: e2etests_android_api_30
+          name: e2etests_android_api_26
           dependsOn: [ 'e2etests_android_api_29' ] # temporary until tests support parallel runs
           runChecks: false
-          displayName: Android API 30
+          displayName: Android API 26
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
           cakeFile: e2etests/build.cake
           cakeTarget: test-android-emu
-          cakeExtraArgs: --avd-target="`"system-images;android-30;google_apis;x86`""
+          cakeExtraArgs: --avd-target="`"system-images;android-26;google_apis;x86`""
           preBuildSteps:
-            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-30;google_apis;x86\""
+            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-26;google_apis;x86\""
+              displayName: Install the Android emulators
+
+      - template: .ci/build.yml@components
+        parameters:
+          name: e2etests_android_api_23
+          dependsOn: [ 'e2etests_android_api_26' ] # temporary until tests support parallel runs
+          runChecks: false
+          displayName: Android API 23
+          windowsImage: ''
+          areaPath: $(AREA_PATH)
+          verbosity: diagnostic
+          cakeFile: e2etests/build.cake
+          cakeTarget: test-android-emu
+          cakeExtraArgs: --avd-target="`"system-images;android-23;google_apis;x86`""
+          preBuildSteps:
+            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-23;google_apis;x86\""
               displayName: Install the Android emulators

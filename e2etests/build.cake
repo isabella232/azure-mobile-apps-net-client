@@ -202,7 +202,7 @@ Task("test-android-emu")
     var emulatorProcess = AndroidEmulatorStart(ANDROID_AVD, emuSettings);
 
     // Run the tests
-    StartProcess("xharness", "android test " +
+    var resultCode = StartProcess("xharness", "android test " +
         $"--app=\"{ANDROID_APK_PATH}\" " +
         $"--package-name=\"{ANDROID_PKG_NAME}\" " +
         $"--instrumentation=\"{ANDROID_INSTRUMENTATION_NAME}\" " +
@@ -218,6 +218,9 @@ Task("test-android-emu")
     // Kill the process if it has not already exited
     try { emulatorProcess.Kill(); }
     catch { }
+
+    if (resultCode != 0)
+        throw new Exception("xharness had an error.");
 
     Information("Done Tests");
 });

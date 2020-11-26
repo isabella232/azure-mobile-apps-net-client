@@ -11,6 +11,7 @@ variables:
   PREVIEW_LABEL: 'preview'
   BUILD_NUMBER: $[counter(format('{0}_{1}_{2}', variables['BASE_VERSION'], variables['PREVIEW_LABEL'], variables['Build.SourceBranch']), 1)]
   NUGET_VERSION: $[format('{0}-{1}.{2}', variables['BASE_VERSION'], variables['PREVIEW_LABEL'], variables['BUILD_NUMBER'])]
+  XHARNESS_VERSION: 1.0.0-prerelease.20575.2
 
 resources:
   repositories:
@@ -90,6 +91,8 @@ stages:
           windowsImage: ''
           macosImage: 'macos-10.14'
           xcode: '11.3.1'
+          tools:
+            - 'Microsoft.DotNet.XHarness.CLI': '$(XHARNESS_VERSION)'
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
           cakeFile: e2etests/build.cake
@@ -108,6 +111,8 @@ stages:
           windowsImage: ''
           macosImage: 'macos-10.14'
           xcode: '11.3.1'
+          tools:
+            - 'Microsoft.DotNet.XHarness.CLI': '$(XHARNESS_VERSION)'
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
           cakeFile: e2etests/build.cake
@@ -126,6 +131,8 @@ stages:
           windowsImage: ''
           macosImage: 'macos-10.14'
           xcode: '11.3.1'
+          tools:
+            - 'Microsoft.DotNet.XHarness.CLI': '$(XHARNESS_VERSION)'
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
           cakeFile: e2etests/build.cake
@@ -133,4 +140,24 @@ stages:
           cakeExtraArgs: --avd-target="`"system-images;android-29;google_apis;x86`""
           preBuildSteps:
             - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-29;google_apis;x86\""
+              displayName: Install the Android emulators
+
+      - template: .ci/build.yml@components
+        parameters:
+          name: e2etests_android_api_30
+          dependsOn: [ 'e2etests_android_api_29' ] # temporary until tests support parallel runs
+          runChecks: false
+          displayName: Android API 30
+          windowsImage: ''
+          macosImage: 'macos-10.14'
+          xcode: '11.3.1'
+          tools:
+            - 'Microsoft.DotNet.XHarness.CLI': '$(XHARNESS_VERSION)'
+          areaPath: $(AREA_PATH)
+          verbosity: diagnostic
+          cakeFile: e2etests/build.cake
+          cakeTarget: test-android-emu
+          cakeExtraArgs: --avd-target="`"system-images;android-30;google_apis;x86`""
+          preBuildSteps:
+            - bash: sh -c "echo \"y\" | $ANDROID_HOME/tools/bin/sdkmanager \"system-images;android-30;google_apis;x86\""
               displayName: Install the Android emulators

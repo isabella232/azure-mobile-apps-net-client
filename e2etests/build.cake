@@ -201,7 +201,7 @@ Task("test-android-emu")
     Information("Starting Emulator: {0}...", ANDROID_AVD);
     var emulatorProcess = AndroidEmulatorStart(ANDROID_AVD, emuSettings);
 
-    var retries = 60;
+    var retries = 120;
     while (AdbShell("getprop sys.boot_completed", adbSettings).FirstOrDefault() != "1") {
         System.Threading.Thread.Sleep(1000);
         if (retries-- <= 0)

@@ -73,6 +73,7 @@ stages:
       #     dependsOn: [ ] # temporary until tests support parallel runs
       #     runChecks: false
       #     displayName: iOS
+      #     publishOutputSuffix: '-ios'
       #     windowsImage: ''
       #     areaPath: $(AREA_PATH)
       #     verbosity: diagnostic
@@ -86,6 +87,7 @@ stages:
           # dependsOn: [ 'e2etests_ios' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 30
+          publishOutputSuffix: '-android30'
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
@@ -102,6 +104,7 @@ stages:
           dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 29
+          publishOutputSuffix: '-android29'
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
@@ -118,6 +121,7 @@ stages:
           dependsOn: [ 'e2etests_android_api_29' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 26
+          publishOutputSuffix: '-android26'
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic
@@ -134,6 +138,7 @@ stages:
           dependsOn: [ 'e2etests_android_api_26' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 23
+          publishOutputSuffix: '-android23'
           windowsImage: ''
           areaPath: $(AREA_PATH)
           verbosity: diagnostic

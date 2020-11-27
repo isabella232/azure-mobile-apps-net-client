@@ -67,24 +67,24 @@ stages:
     displayName: Device End-to-End Tests
     dependsOn: [ ]
     jobs:
-      - template: .ci/build.yml@components
-        parameters:
-          name: e2etests_ios
-          dependsOn: [ ] # temporary until tests support parallel runs
-          runChecks: false
-          displayName: iOS
-          publishOutputSuffix: '-ios'
-          windowsImage: ''
-          areaPath: $(AREA_PATH)
-          verbosity: diagnostic
-          cakeFile: e2etests/build.cake
-          cakeTarget: test-ios-emu
-          cakeExtraArgs: --ios-device="`"iPhone 11`"" --ios-runtime="`"com.apple.CoreSimulator.SimRuntime.iOS-14-0`""
+      # - template: .ci/build.yml@components
+      #   parameters:
+      #     name: e2etests_ios
+      #     dependsOn: [ ] # temporary until tests support parallel runs
+      #     runChecks: false
+      #     displayName: iOS
+      #     publishOutputSuffix: '-ios'
+      #     windowsImage: ''
+      #     areaPath: $(AREA_PATH)
+      #     verbosity: diagnostic
+      #     cakeFile: e2etests/build.cake
+      #     cakeTarget: test-ios-emu
+      #     cakeExtraArgs: --ios-device="`"iPhone 11`"" --ios-runtime="`"com.apple.CoreSimulator.SimRuntime.iOS-14-0`""
 
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_30
-          dependsOn: [ 'e2etests_ios' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_ios' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 30
           publishOutputSuffix: '-android30'
@@ -101,7 +101,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_29
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 29
           publishOutputSuffix: '-android29'
@@ -118,7 +118,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_26
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 26
           publishOutputSuffix: '-android26'
@@ -135,7 +135,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_25
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 25
           publishOutputSuffix: '-android25'
@@ -152,7 +152,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_24
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 24
           publishOutputSuffix: '-android24'
@@ -169,7 +169,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_23
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 23
           publishOutputSuffix: '-android23'
@@ -186,7 +186,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_22
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 22
           publishOutputSuffix: '-android22'
@@ -203,7 +203,7 @@ stages:
       - template: .ci/build.yml@components
         parameters:
           name: e2etests_android_api_21
-          dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
+          # dependsOn: [ 'e2etests_android_api_30' ] # temporary until tests support parallel runs
           runChecks: false
           displayName: Android API 21
           publishOutputSuffix: '-android21'

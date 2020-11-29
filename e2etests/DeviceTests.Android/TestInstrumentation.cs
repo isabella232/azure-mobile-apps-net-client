@@ -75,8 +75,7 @@ namespace DeviceTests.Android
 
             public TestRunner(string resultsFileName)
             {
-                var docsType = global::Android.OS.Environment.DirectoryDocuments;
-                var docsDir = Application.Context.GetExternalFilesDir(docsType).AbsolutePath;
+                var docsDir = FileSystem.AppDataDirectory;
                 if (!Directory.Exists(docsDir))
                     Directory.CreateDirectory(docsDir);
 

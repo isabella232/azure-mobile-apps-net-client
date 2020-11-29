@@ -60,8 +60,8 @@ namespace DeviceTests.Android
 
             await runner.RunAsync();
 
-            if (File.Exists(runner.TestsResultsFinalPath))
-                bundle.PutString("test-results-path", runner.TestsResultsFinalPath);
+            //if (File.Exists(runner.TestsResultsFinalPath))
+            //    bundle.PutString("test-results-path", runner.TestsResultsFinalPath);
 
             if (bundle.GetLong("return-code", -1) == -1)
                 bundle.PutLong("return-code", 1);

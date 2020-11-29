@@ -75,7 +75,7 @@ namespace DeviceTests.Android
 
             public TestRunner(string resultsFileName)
             {
-                var docsDir = FileSystem.AppDataDirectory;
+                var docsDir = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
                 if (!Directory.Exists(docsDir))
                     Directory.CreateDirectory(docsDir);
 
